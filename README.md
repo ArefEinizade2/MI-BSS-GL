@@ -14,7 +14,7 @@ Note that we have used an accelarted graph learning method for learning the unde
 ![This is an image3](B.png)
 
 <p align="center">
-  <img width="400" height="200" src="C.png">
+  <img width="600" height="300" src="C.png">
 </p>
 
 Thanks a lot for your attention.
