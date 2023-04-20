@@ -10,11 +10,11 @@ The codes were written in MATLAB 2018b, and the [GSPBOX](https://epfl-lts2.githu
 Note that we have used an accelarted graph learning method for learning the underlying graph proposed in [this paper](https://doi.org/10.1109/LSP.2021.3123459). Besides, in the comparisons, we used an implementation of the JADE method released [here](http://www2.iap.fr/users/cardoso/code/Jade/jadeR.m).
 
 <p align="center">
-  <img width="600" height="600" src="A.png">
+  <img width="800" height="600" src="A.png">
 </p>
 
 <p align="center">
-  <img width="600" height="600" src="B.png">
+  <img width="800" height="600" src="B.png">
 </p>
 
 ![This is an image](C.png)
