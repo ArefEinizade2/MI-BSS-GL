@@ -13,9 +13,7 @@ Note that we have used an accelarted graph learning method for learning the unde
   <img width="400" height="200" src="A.png">
 </p>
 
-<p align="center">
-  <img2 width="400" height="200" src="B.png">
-</p>
+![This is an image2](A.png)
 
 ![This is an image](C.png)
 
