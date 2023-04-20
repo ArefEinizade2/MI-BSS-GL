@@ -1,5 +1,5 @@
-# MI-BSS-GL: Joint Graph Learning and Blind Separation of Smooth Graph Signals Using Minimization of Mutual Information and Laplacian Quadratic Forms
-This repository implements a demo for **Joint Graph Learning and Blind Separation of Smooth Graph Signals** using the proposed **MI-BSS-GL** method, similar to the Figures 1 and 2 in our paper [1]. In the case of finding its contents useful for your research work, kindly please cite our paper [1] addressed below. Thanks a lot for your attention.
+# MI-BSS-GL: Joint Graph Learning and Blind Separation of Smooth Graph Signals
+This repository implements a demo for **Joint Graph Learning and Blind Separation of Smooth Graph Signals Using Minimization of Mutual Information and Laplacian Quadratic Forms** using the proposed **MI-BSS-GL** method, similar to the Figures 1 and 2 in our paper [1]. In the case of finding its contents useful for your research work, kindly please cite our paper [1] addressed below. Thanks a lot for your attention.
 
 [[1] Einizade, Aref, and Sepideh Hajipour Sardouie. "Joint Graph Learning and Blind Separation of Smooth Graph Signals Using Minimization of Mutual Information and Laplacian Quadratic Forms." IEEE Transactions on Signal and Information Processing over Networks 9 (2023): 35-47.](https://doi.org/10.1109/TSIPN.2023.3240893)
 
