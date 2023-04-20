@@ -15,6 +15,8 @@ Note that we have used an accelarted graph learning method for learning the unde
 
 ![This is an image2](A.png)
 
+![This is an image3](B.png)
+
 ![This is an image](C.png)
 
 Thanks a lot for your attention.
