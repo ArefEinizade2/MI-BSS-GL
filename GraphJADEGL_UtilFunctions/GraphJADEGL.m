@@ -1,4 +1,9 @@
 function [ZjadeGL, U, W_est] = GraphJADEGL(X, P, N, DelayNum, Lambda_b, Maxiter)
+% Implements the GraphJADEGL method for simultaneous graph learning and blind separation of graph signal sources, as proposed in our papers [1,2].
+% In the case of finding its contents useful for your research work, kindly please also cite our paper addressed below:
+% [1] Einizade, Aref, Sepideh Hajipour Sardouie, and Mohammad B. Shamsollahi. "Simultaneous graph learning and blind separation of graph signal sources." IEEE Signal Processing Letters 28 (2021): 1495-1499.
+% [2]Einizade, Aref, and Sepideh Hajipour Sardouie. "A unified approach for simultaneous graph learning and blind separation of graph signal sources." IEEE Transactions on Signal and Information Processing over Networks 8 (2022): 543-555.
+%%
 WinNum = floor(size(X,2)/N);
 X = X(:,1:WinNum*N);
 Graph_decorrelation_term = 0;
