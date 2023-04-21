@@ -4,7 +4,7 @@ function [y, B] = MI_BSS_KG(x, L, param)
 % [1] Einizade, Aref, and Sepideh Hajipour Sardouie. "Joint Graph Learning and Blind Separation of Smooth Graph Signals Using Minimization of Mutual Information and Laplacian Quadratic Forms." IEEE Transactions on Signal and Information Processing over Networks 9 (2023): 35-47.
 %%
 % Usage: 
-%   >> [y, B] = MI_BSS_KG(x, param);
+%   >> [y, B] = MI_BSS_GL(x, mu, lambda, WinNum, L);
 
 %   x: nxT, n is the number of sources, T is the number of observed temporal samples
 %   param.mu: the learning rate used in the Gradient Descent step, e.g., 0.1
@@ -14,6 +14,7 @@ function [y, B] = MI_BSS_KG(x, L, param)
 %   param.mu: the learning rate used in the Gradient Descent step, e.g., 0.1
 %   param.lambda: balances the weight between minimization of mutual information and graph learning terms, e.g., 1e-2
 %   param.WinNum: the number of windows in the cyclostationary sources, e.g., 40
+%   param.Tol: the number of windows in the cyclostationary sources, e.g., 40
 %   param.Tol: tolerance for reaching convergence
 %   param.MaxIter: maximum iterations for convergence
 
@@ -23,8 +24,6 @@ function [y, B] = MI_BSS_KG(x, L, param)
 mu = param.mu;
 lambda = param.lambda;
 WinNum = param.WinNum;
-Tol = param.Tol;
-MaxIter = param.MaxIter;
 
 [P, M] = size(x);
 
@@ -91,7 +90,7 @@ for iter = 1 : 5000
 
     B = new_B;
 
-    if error(iter) < Tol           
+    if error(iter) < 1e-3           
         break;
     end
 

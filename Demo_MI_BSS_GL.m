@@ -13,19 +13,20 @@ addpath('./NeededFunctions');
 %% setting input parameters:
 P_rd = 0.6; % edge probability of Erdos-Renyi graphs
 N = 10; % number of nodes of Erdos-Renyi graphs
-lambda_GL = 1e-2; % lambda in the MI-BSS-GL method
-lambda_KG = 1e-2; % lambda in the MI-BSS-KG method
-param.connected = 1; % make the generated Erdos-Renyi graphs to be connected 
+param_ER.connected = 1; % make the generated Erdos-Renyi graphs to be connected 
 MeanVec = zeros(1, N); % mean of the generated graph signals
 DelayNum = 1; % Delay parameter in the GraphJADE and GraphJADE-GL methods
-mu = 0.1; % the learning rate in the gradient descent step of the MI-BSS-GL and MI-BSS-KG methods
-WinNum = 80; % number of windows, omega in the paper, for the MI-BSS-GL method
+param.mu = 0.1; % the learning rate in the gradient descent step of the MI-BSS-GL and MI-BSS-KG methods
+param.lambda = 1e-2; % lambda in the MI-BSS-GL method
+param.WinNum = 40; % number of windows, omega in the paper, for the MI-BSS-GL method
+param.Tol = 1e-3; % tolerance for reaching convergence
+param.MaxIter = 5000; %  maximum iterations for convergence
 nSamples = 1; % number of i.i.d. graph signals per window
 b_GraphJADE = 0.4; % balancing parameter in the GraphJADE and GraphJADE-GL methods
 Maxiter_GraphJADE = 10; % number of convergence iterations of the GraphJADE and GraphJADE-GL methods
-MaxGen = 20; % number of genertated independent realizations 
+MaxGen = 100; % number of genertated independent realizations 
 sigma_vec = [0.3, 0.5, 0.7, 0.9]; % the span of variation of the noise level (sigma) 
-source_num_vec = 2:3;  % the span of variation of the source numbers 
+source_num_vec = 2:4;  % the span of variation of the source numbers 
 
 %% Perform the related analysis explained in our manuscript:
 t0 = tic;
@@ -44,13 +45,13 @@ for iter = 1 : MaxGen
     sigma
     iter
 
-s = zeros(source_num, WinNum*N);
+s = zeros(source_num, param.WinNum * N);
 
 G = {}; W_org = {}; L = {}; V = {}; d = {}; D = {}; gftcoeff = {};
 
 for source = 1 : source_num
     
-    G{source} = gsp_erdos_renyi(N, P_rd, param); % generating Erdos-Renyi graphs using GSPBOX
+    G{source} = gsp_erdos_renyi(N, P_rd, param_ER); % generating Erdos-Renyi graphs using GSPBOX
 
     W_org{source} = full(G{source}.W); % original adjacency matrix
 
@@ -60,7 +61,7 @@ for source = 1 : source_num
 
     d{source} = pinv(D{source}); % pseudo-inverse of eigenvalue matrix of the laplacian
 
-    for r = 1 : WinNum % generate smooth graph signals for each window
+    for r = 1 : param.WinNum % generate smooth graph signals for each window
         
         gftcoeff{source} = mvnrnd(MeanVec, d{source}, nSamples);
 
@@ -76,10 +77,10 @@ A = 0.8 * rand(size(s,1), size(s,1));
 A = A - diag(diag(A));
 A = A + eye(size(s,1));
 X = A * s;
-
 %% Apply MI-BSS method (MI-BSS-GL with lambda=0): 
-lambda = 0;
-[y, B1] = MI_BSS_GL(X, mu, lambda, WinNum);
+param_MIBSS = param;
+param_MIBSS.lambda = 0;
+[y, B1] = MI_BSS_GL(X, param_MIBSS);
 
 % calculate the Minimum Distance criterion metric in source sepration:
 MD1(find(source_num_vec==source_num), find(sigma_vec==sigma), iter) = N * (source_num - 1) * Minimum_Distance_crit(A, B1);
@@ -88,9 +89,8 @@ MD1(find(source_num_vec==source_num), find(sigma_vec==sigma), iter) = N * (sourc
 S = normalize(s ,2,'range');
 y = normalize(y ,2,'range');
 SNR_Final_MIBSS(find(source_num_vec==source_num), find(sigma_vec==sigma), iter) = mean(10 * log10 (mean(S.^2,2) ./  mean((S-y).^2 , 2)));  % Equivalent
-
 %% Apply the proposed MI-BSS-GL method:
-[y_GS, B2, W_est] = MI_BSS_GL(X, mu, lambda_GL, WinNum);
+[y_GS, B2, W_est] = MI_BSS_GL(X, param);
 
 % calculate the Minimum Distance criterion metric in source sepration:
 MD2(find(source_num_vec==source_num), find(sigma_vec==sigma), iter) = N * (source_num - 1) * Minimum_Distance_crit(A, B2);
@@ -108,7 +108,7 @@ for p = 1 : size(s,1)
 end
 %% Apply MI-BSS-KG method as gold standard:
 
-[y_GS_KG, B2_KG] = MI_BSS_KG(X, mu, lambda_KG, WinNum, s, L);
+[y_GS_KG, B2_KG] = MI_BSS_KG(X, L, param);
 
 % calculate the Minimum Distance criterion metric in source sepration:
 MD2_KG(find(source_num_vec==source_num), find(sigma_vec==sigma), iter) = N * (source_num - 1) * Minimum_Distance_crit(A, B2_KG);
