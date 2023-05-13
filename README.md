@@ -7,7 +7,7 @@ The codes were written in MATLAB 2018b, and the [GSPBOX](https://epfl-lts2.githu
 
 - Run `Demo_MI_BSS_GL.m` to generate the desired results. 
 
-Note that we have used an accelarted graph learning method for learning the underlying graph proposed in [this paper](https://doi.org/10.1109/LSP.2021.3123459). Besides, in the comparisons, we used an implementation of the JADE method released [here](http://www2.iap.fr/users/cardoso/code/Jade/jadeR.m).
+Note that we have used an accelarted graph learning method for learning the underlying graph proposed in [this paper](https://doi.org/10.1109/LSP.2021.3123459). Besides, in the comparisons, the implementation of the JADE method can be found [here](http://www2.iap.fr/users/cardoso/code/Jade/jadeR.m).
 
 ![This is an image2](A.png)
 
