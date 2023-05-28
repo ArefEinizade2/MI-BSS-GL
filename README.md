@@ -3,7 +3,7 @@ This repository implements a demo for **Joint Graph Learning and Blind Separatio
 
 [[1] Einizade, Aref, and Sepideh Hajipour Sardouie. "Joint Graph Learning and Blind Separation of Smooth Graph Signals Using Minimization of Mutual Information and Laplacian Quadratic Forms." IEEE Transactions on Signal and Information Processing over Networks 9 (2023): 35-47.](https://doi.org/10.1109/TSIPN.2023.3240893)
 
-![This is an image222](MI_BSS_GL_BlockDiag.png)
+![This is an image222](MI_BSS_GL_BlockDiag.PNG)
 
 The codes were written in MATLAB 2018b, and the [GSPBOX](https://epfl-lts2.github.io/gspbox-html/) and [UNLocBoX](https://epfl-lts2.github.io/unlocbox-html/) toolboxes are also needed to run this demo.
 
